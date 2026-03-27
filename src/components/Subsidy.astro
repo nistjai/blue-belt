@@ -1,0 +1,66 @@
+<!--
+  ╔══════════════════════════════════════════════════╗
+  ║  SUBSIDY SECTION (PM Surya Ghar Yojana)          ║
+  ║  Shows government solar subsidy slabs:            ║
+  ║  - Up to 2 kW: ₹30K/kW                            ║
+  ║  - 2–3 kW: ₹18K/kW                                ║
+  ║  - 3 kW+ Total: ₹78K max                          ║
+  ║  Decorative rotating SVG sun illustration.        ║
+  ╚══════════════════════════════════════════════════╝
+-->
+<section class="py-32 relative overflow-hidden border-t" style="background: var(--bg-primary); border-color: var(--border);" id="subsidy">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-[120px]" style="background: var(--accent-soft);"></div>
+  <div class="absolute left-[-100px] top-[50%] -translate-y-1/2 w-[300px] h-[300px] opacity-[0.03] hidden lg:block">
+    <svg viewBox="0 0 200 200" fill="none" class="w-full h-full animate-rotate-slow">
+      <circle cx="100" cy="100" r="40" stroke="var(--accent)" stroke-width="1"/>
+      <circle cx="100" cy="100" r="60" stroke="var(--accent)" stroke-width="0.5" stroke-dasharray="4 6"/>
+      <circle cx="100" cy="100" r="80" stroke="var(--accent)" stroke-width="0.5" stroke-dasharray="2 8"/>
+      <line x1="100" y1="10" x2="100" y2="30" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="100" y1="170" x2="100" y2="190" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="10" y1="100" x2="30" y2="100" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="170" y1="100" x2="190" y2="100" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="36" y1="36" x2="50" y2="50" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="150" y1="150" x2="164" y2="164" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="164" y1="36" x2="150" y2="50" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="50" y1="150" x2="36" y2="164" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20 animate-on-scroll">
+      <div>
+        <span class="text-sm font-medium tracking-[0.2em] uppercase block mb-4" style="color: var(--accent);">PM Surya Ghar Yojana</span>
+        <h2 class="text-4xl md:text-6xl font-black tracking-tight uppercase leading-[0.95]" style="color: var(--text-primary);">Government<br/>Solar Subsidy</h2>
+      </div>
+      <p class="max-w-md text-lg leading-relaxed" style="color: var(--text-secondary);">Save up to 40% on your solar installation cost. We handle the entire application process.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px rounded-2xl overflow-hidden mb-16" style="background: var(--border);">
+      <div class="animate-on-scroll group p-10 transition-all duration-500" style="background: var(--bg-card);">
+        <span class="text-sm font-medium tracking-[0.2em] uppercase block mb-6" style="color: var(--accent);">Up to 2 kW</span>
+        <div class="text-5xl md:text-6xl font-black tracking-tight mb-3" style="color: var(--text-primary);">₹30K<span class="text-xl font-medium" style="color: var(--text-muted);">/kW</span></div>
+        <p class="text-sm" style="color: var(--text-muted);">Central government subsidy for first 2 kW capacity.</p>
+        <div class="w-8 h-px mt-6 transition-all duration-500 group-hover:w-12" style="background: var(--accent);"></div>
+      </div>
+      <div class="animate-on-scroll animate-delay-100 group p-10 transition-all duration-500" style="background: var(--bg-card);">
+        <span class="text-sm font-medium tracking-[0.2em] uppercase block mb-6" style="color: var(--accent);">2–3 kW</span>
+        <div class="text-5xl md:text-6xl font-black tracking-tight mb-3" style="color: var(--text-primary);">₹18K<span class="text-xl font-medium" style="color: var(--text-muted);">/kW</span></div>
+        <p class="text-sm" style="color: var(--text-muted);">Additional subsidy for capacity between 2–3 kW.</p>
+        <div class="w-8 h-px mt-6 transition-all duration-500 group-hover:w-12" style="background: var(--accent);"></div>
+      </div>
+      <div class="animate-on-scroll animate-delay-200 group p-10 transition-all duration-500" style="background: var(--bg-card);">
+        <span class="text-sm font-medium tracking-[0.2em] uppercase block mb-6" style="color: var(--accent);">3 kW+ Total</span>
+        <div class="text-5xl md:text-6xl font-black tracking-tight mb-3" style="color: var(--text-primary);">₹78K</div>
+        <p class="text-sm" style="color: var(--text-muted);">Maximum total subsidy available for 3 kW and above.</p>
+        <div class="w-8 h-px mt-6 transition-all duration-500 group-hover:w-12" style="background: var(--accent);"></div>
+      </div>
+    </div>
+
+    <div class="animate-on-scroll">
+      <a href="#contact" class="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm uppercase tracking-[0.1em] shadow-xl hover:scale-105 transition-all duration-300" style="background: var(--accent); color: var(--accent-text); box-shadow: 0 4px 25px var(--shadow-accent);">
+        Check Your Eligibility
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>

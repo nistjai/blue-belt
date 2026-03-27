@@ -1,0 +1,111 @@
+<!--
+  ╔══════════════════════════════════════════════════╗
+  ║  HERO SECTION                                    ║
+  ║  Full-screen landing with:                       ║
+  ║  - Ambient gradient orbs for depth                ║
+  ║  - Animated SVG solar panel illustration           ║
+  ║  - Giant headline + CTA buttons                   ║
+  ║  - Stats row with counter animation               ║
+  ║  - Scroll indicator at bottom                     ║
+  ╚══════════════════════════════════════════════════╝
+-->
+---
+import heroLogo from '../images/dhartisolarlogo.png';
+---
+<section class="relative flex flex-col items-center justify-center min-h-screen overflow-hidden" style="background: var(--bg-primary);">
+  <!-- Deep ambient gradient background -->
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(var(--particle-color), 0.06) 0%, transparent 70%);"></div>
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse 50% 80% at 80% 20%, rgba(var(--particle-color), 0.04) 0%, transparent 60%);"></div>
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse 40% 50% at 15% 80%, rgba(var(--particle-color), 0.03) 0%, transparent 50%);"></div>
+
+  <!-- Subtle animated orbs for depth -->
+  <div class="absolute top-[10%] right-[15%] w-[500px] h-[500px] rounded-full blur-[150px] animate-pulse-glow" style="background: rgba(var(--particle-color), 0.05);"></div>
+  <div class="absolute bottom-[5%] left-[10%] w-[400px] h-[400px] rounded-full blur-[120px] animate-pulse-glow" style="background: rgba(var(--particle-color), 0.04); animation-delay: 3s;"></div>
+
+  <!-- Animated SVG solar panel graphic (right side on desktop) -->
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-[0.04] hidden lg:block">
+    <svg viewBox="0 0 500 500" fill="none" class="w-full h-full animate-float">
+      <g class="animate-rotate-slow" style="transform-origin: 250px 180px;">
+        <line x1="250" y1="100" x2="250" y2="40" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="306" y1="124" x2="348" y2="82" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="330" y1="180" x2="390" y2="180" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="306" y1="236" x2="348" y2="278" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="194" y1="124" x2="152" y2="82" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="170" y1="180" x2="110" y2="180" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="194" y1="236" x2="152" y2="278" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <circle cx="250" cy="180" r="50" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <circle cx="250" cy="180" r="35" stroke="var(--accent)" stroke-width="1" fill="none" opacity="0.3"/>
+      <rect x="140" y="300" width="220" height="140" rx="4" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.5" transform="skewX(-5)"/>
+      <line x1="140" y1="335" x2="360" y2="335" stroke="var(--accent)" stroke-width="0.8" opacity="0.3" transform="skewX(-5)"/>
+      <line x1="140" y1="370" x2="360" y2="370" stroke="var(--accent)" stroke-width="0.8" opacity="0.3" transform="skewX(-5)"/>
+      <line x1="140" y1="405" x2="360" y2="405" stroke="var(--accent)" stroke-width="0.8" opacity="0.3" transform="skewX(-5)"/>
+      <line x1="195" y1="300" x2="195" y2="440" stroke="var(--accent)" stroke-width="0.8" opacity="0.3" transform="skewX(-5)"/>
+      <line x1="250" y1="300" x2="250" y2="440" stroke="var(--accent)" stroke-width="0.8" opacity="0.3" transform="skewX(-5)"/>
+      <line x1="305" y1="300" x2="305" y2="440" stroke="var(--accent)" stroke-width="0.8" opacity="0.3" transform="skewX(-5)"/>
+      <path d="M250 260 Q250 280 250 300" stroke="var(--accent)" stroke-width="1" fill="none" stroke-dasharray="4 6" style="animation: dash-flow 2s linear infinite;"/>
+      <path d="M245 470 L255 455 L248 455 L258 440 L248 455 L255 455 Z" fill="var(--accent)" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-24">
+    <!-- Top tag -->
+    <div class="animate-on-scroll mb-12">
+      <span class="inline-flex items-center gap-2 text-sm font-medium tracking-[0.2em] uppercase" style="color: var(--accent);">
+        <span class="inline-block w-8 h-px" style="background: var(--accent);"></span>
+        Dharti Solar — Est. 2020
+      </span>
+    </div>
+
+    <!-- Giant headline -->
+    <h1 class="animate-on-scroll text-[clamp(2.5rem,8vw,7rem)] font-black leading-[0.88] tracking-tighter uppercase mb-8">
+      <span class="block" style="color: var(--text-primary);">Powering the</span>
+      <span class="block" style="color: var(--text-primary);">future with</span>
+      <span class="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent block">clean energy</span>
+    </h1>
+
+    <!-- Subtext + CTA row -->
+    <div class="animate-on-scroll flex flex-col md:flex-row md:items-end md:justify-between gap-8 mt-12">
+      <p class="text-lg md:text-xl max-w-lg leading-relaxed" style="color: var(--text-secondary);">From rooftops to megawatt solar farms — premium installations with full government subsidy support across 3 states.</p>
+      <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+        <a href="#contact" class="group px-8 py-4 rounded-full font-bold text-base shadow-xl hover:scale-[1.03] transition-all duration-300" style="background: var(--accent); color: var(--accent-text); box-shadow: 0 4px 30px var(--shadow-accent);">
+          Get Free Consultation
+          <svg class="inline-block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#calculator" class="px-8 py-4 rounded-full font-semibold text-base border backdrop-blur-sm transition-all duration-300 hover:border-[var(--accent)]" style="background: var(--bg-elevated); color: var(--text-primary); border-color: var(--border);">
+          <svg class="inline-block w-4 h-4 mr-2" style="color: var(--accent);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+          Calculate Savings
+        </a>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="w-full h-px my-16" style="background: linear-gradient(to right, transparent, rgba(var(--particle-color), 0.15), transparent);"></div>
+
+    <!-- Stats row -->
+    <div class="animate-on-scroll grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <p class="text-4xl md:text-5xl font-black tracking-tight" style="color: var(--text-primary);"><span data-count="500" data-suffix="+">0</span></p>
+        <p class="text-sm mt-2 uppercase tracking-wider" style="color: var(--text-muted);">Installations</p>
+      </div>
+      <div>
+        <p class="text-4xl md:text-5xl font-black tracking-tight" style="color: var(--text-primary);"><span data-count="3" data-suffix="+">0</span></p>
+        <p class="text-sm mt-2 uppercase tracking-wider" style="color: var(--text-muted);">States</p>
+      </div>
+      <div>
+        <p class="text-4xl md:text-5xl font-black tracking-tight" style="color: var(--text-primary);"><span data-count="98" data-suffix="%">0</span></p>
+        <p class="text-sm mt-2 uppercase tracking-wider" style="color: var(--text-muted);">Satisfaction</p>
+      </div>
+      <div>
+        <p class="text-4xl md:text-5xl font-black tracking-tight" style="color: var(--text-primary);"><span data-prefix="₹" data-count="2" data-suffix="Cr+">0</span></p>
+        <p class="text-sm mt-2 uppercase tracking-wider" style="color: var(--text-muted);">Savings Generated</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs tracking-widest uppercase animate-float" style="color: var(--text-muted);">
+    <span>Scroll</span>
+    <div class="w-px h-8" style="background: linear-gradient(to bottom, var(--text-muted), transparent);"></div>
+  </div>
+</section>

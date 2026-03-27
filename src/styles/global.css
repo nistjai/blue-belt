@@ -1,0 +1,289 @@
+/*
+ * ╔══════════════════════════════════════════════════╗
+ * ║  GLOBAL STYLESHEET — Dharti Solar                ║
+ * ║  Contains:                                       ║
+ * ║  1. Tailwind CSS import                          ║
+ * ║  2. Dark / Light theme variables                 ║
+ * ║  3. Base resets & film-grain overlay              ║
+ * ║  4. Theme shorthand utility classes (.t-*)       ║
+ * ║  5. Scroll-reveal animation classes              ║
+ * ║  6. @keyframes (float, pulse, rotate, etc.)      ║
+ * ║  7. Particle canvas layer                        ║
+ * ║  8. Range slider, scrollbar, selection styles    ║
+ * ║  9. Theme toggle pill button                     ║
+ * ╚══════════════════════════════════════════════════╝
+ */
+
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════
+   1. THEME SYSTEM — CSS Custom Properties
+   Dark (default) + Light (.light class on <html>)
+   ═══════════════════════════════════════════════ */
+
+/* ── Dark Mode (default) ── */
+:root {
+  --bg-primary: #06080f;
+  --bg-secondary: #0c1019;
+  --bg-card: #0a0e17;
+  --bg-card-alt: #111827;
+  --bg-card-hover: rgba(17,24,39,0.7);
+  --bg-nav: rgba(6,8,15,0.7);
+  --bg-elevated: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #4b5563;
+  --text-faint: #1e293b;
+  --accent: #22c55e;
+  --accent-hover: #4ade80;
+  --accent-glow: rgba(34,197,94,0.18);
+  --accent-soft: rgba(34,197,94,0.06);
+  --accent-text: #020617;
+  --shadow-accent: rgba(34,197,94,0.25);
+  --particle-color: 34, 197, 94;
+  --slider-track: rgba(255,255,255,0.08);
+  --scrollbar-bg: #06080f;
+  --scrollbar-thumb: rgba(34,197,94,0.4);
+  --map-filter: invert(0.9) hue-rotate(180deg) brightness(0.7) contrast(1.1);
+  --grain-opacity: 0.035;
+  --glow-spread: 0.08;
+  color-scheme: dark;
+}
+
+/* ── Light Mode ── */
+:root.light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-alt: #f1f5f9;
+  --bg-card-hover: rgba(241,245,249,0.8);
+  --bg-nav: rgba(255,255,255,0.8);
+  --bg-elevated: rgba(0,0,0,0.02);
+  --border: rgba(0,0,0,0.07);
+  --border-hover: rgba(0,0,0,0.14);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-faint: #e2e8f0;
+  --accent: #16a34a;
+  --accent-hover: #15803d;
+  --accent-glow: rgba(22,163,74,0.14);
+  --accent-soft: rgba(22,163,74,0.05);
+  --accent-text: #ffffff;
+  --shadow-accent: rgba(22,163,74,0.18);
+  --particle-color: 22, 163, 74;
+  --slider-track: rgba(0,0,0,0.08);
+  --scrollbar-bg: #f1f5f9;
+  --scrollbar-thumb: rgba(22,163,74,0.4);
+  --map-filter: none;
+  --grain-opacity: 0.02;
+  --glow-spread: 0.04;
+  color-scheme: light;
+}
+
+/* ═══════════════ Base ═══════════════ */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background 0.5s cubic-bezier(.4,0,.2,1), color 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+/* Film grain overlay for depth */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px;
+}
+
+/* ═══════════════ Theme Utilities ═══════════════ */
+.t-bg           { background: var(--bg-primary); }
+.t-bg-s         { background: var(--bg-secondary); }
+.t-bg-card      { background: var(--bg-card); }
+.t-bg-card-alt  { background: var(--bg-card-alt); }
+.t-bg-nav       { background: var(--bg-nav); }
+.t-bg-elevated  { background: var(--bg-elevated); }
+.t-border       { border-color: var(--border); }
+.t-border-hover:hover { border-color: var(--border-hover); }
+.t-text         { color: var(--text-primary); }
+.t-text-s       { color: var(--text-secondary); }
+.t-text-m       { color: var(--text-muted); }
+.t-accent       { color: var(--accent); }
+.t-grid-gap     { background: var(--border); }
+
+/* ═══════════════ Scroll reveal ═══════════════ */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animate-delay-100 { transition-delay: 0.1s; }
+.animate-delay-200 { transition-delay: 0.2s; }
+.animate-delay-300 { transition-delay: 0.3s; }
+.animate-delay-400 { transition-delay: 0.4s; }
+.animate-delay-500 { transition-delay: 0.5s; }
+
+/* ═══════════════ Animations ═══════════════ */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes dash-flow {
+  to { stroke-dashoffset: -100; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+.animate-rotate-slow { animation: rotate-slow 20s linear infinite; }
+
+/* ═══════════════ Particle canvas ═══════════════ */
+.particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+  mix-blend-mode: screen;
+}
+:root.light .particle-canvas {
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+/* ═══════════════ Ambient section glows ═══════════════ */
+section {
+  position: relative;
+}
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--particle-color), var(--glow-spread)), transparent);
+  pointer-events: none;
+}
+
+/* ═══════════════ Range slider ═══════════════ */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+input[type="range"]::-webkit-slider-track {
+  height: 4px;
+  background: var(--slider-track);
+  border-radius: 2px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--shadow-accent);
+  margin-top: -8px;
+  transition: transform 0.15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: var(--slider-track);
+  border-radius: 2px;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  box-shadow: 0 0 12px var(--shadow-accent);
+}
+
+/* ═══════════════ Scrollbar ═══════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ═══════════════ Selection ═══════════════ */
+::selection {
+  background: var(--accent-glow);
+  color: var(--text-primary);
+}
+
+/* ═══════════════ Theme toggle button ═══════════════ */
+.theme-toggle {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  border-radius: 13px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  overflow: hidden;
+}
+.theme-toggle:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--shadow-accent);
+}
+.theme-toggle .toggle-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform 0.4s cubic-bezier(0.68, -0.4, 0.27, 1.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px var(--shadow-accent);
+}
+:root.light .theme-toggle .toggle-dot {
+  transform: translateX(22px);
+}
+.theme-toggle .toggle-dot svg {
+  width: 11px;
+  height: 11px;
+  color: var(--accent-text);
+}

@@ -1,0 +1,207 @@
+<!--
+  ╔══════════════════════════════════════════════════╗
+  ║  SOLAR SAVINGS CALCULATOR                        ║
+  ║  Interactive tool with 3 sliders:                 ║
+  ║  - Monthly electricity bill (₹500–₹20,000)         ║
+  ║  - Available roof area (100–2,000 sq ft)          ║
+  ║  - Average sunlight hours/day (3–8 hrs)           ║
+  ║  Calculates: kW recommendation, system cost,      ║
+  ║  govt subsidy, monthly savings, payback period.   ║
+  ║  SVG gauge circle animates savings percentage.    ║
+  ╚══════════════════════════════════════════════════╝
+-->
+<section class="py-32 relative overflow-hidden" id="calculator" style="background: var(--bg-primary); border-top: 1px solid var(--border);">
+  <!-- Background graphic -->
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 70% 50%, var(--accent-soft) 0%, transparent 50%);"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20 animate-on-scroll">
+      <div>
+        <span class="text-sm font-medium tracking-[0.2em] uppercase block mb-4" style="color: var(--accent);">Savings Calculator</span>
+        <h2 class="text-4xl md:text-6xl font-black tracking-tight uppercase leading-[0.95]" style="color: var(--text-primary);">Calculate Your<br/>Solar Savings</h2>
+      </div>
+      <p class="max-w-md text-lg leading-relaxed" style="color: var(--text-secondary);">See how much you can save by switching to solar energy with government subsidy.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-px rounded-2xl overflow-hidden" style="background: var(--border);">
+      <!-- Input side -->
+      <div class="animate-on-scroll p-8 md:p-12" style="background: var(--bg-primary);">
+        <div class="space-y-10">
+          <!-- Monthly bill slider -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label class="text-xs font-medium uppercase tracking-[0.15em]" style="color: var(--text-secondary);">Monthly Electricity Bill</label>
+              <span id="bill-display" class="text-2xl font-black tabular-nums" style="color: var(--accent);">₹2,000</span>
+            </div>
+            <input type="range" id="bill-slider" min="500" max="20000" step="500" value="2000" />
+            <div class="flex justify-between text-[10px] mt-2 uppercase tracking-wider" style="color: var(--text-muted);">
+              <span>₹500</span>
+              <span>₹20,000</span>
+            </div>
+          </div>
+
+          <!-- Roof area slider -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label class="text-xs font-medium uppercase tracking-[0.15em]" style="color: var(--text-secondary);">Available Roof Area</label>
+              <span id="area-display" class="text-2xl font-black tabular-nums" style="color: var(--accent);">200 sq ft</span>
+            </div>
+            <input type="range" id="area-slider" min="100" max="2000" step="50" value="200" />
+            <div class="flex justify-between text-[10px] mt-2 uppercase tracking-wider" style="color: var(--text-muted);">
+              <span>100 sq ft</span>
+              <span>2,000 sq ft</span>
+            </div>
+          </div>
+
+          <!-- Sunlight hours -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label class="text-xs font-medium uppercase tracking-[0.15em]" style="color: var(--text-secondary);">Avg. Sunlight Hours/Day</label>
+              <span id="sun-display" class="text-2xl font-black tabular-nums" style="color: var(--accent);">5 hrs</span>
+            </div>
+            <input type="range" id="sun-slider" min="3" max="8" step="0.5" value="5" />
+            <div class="flex justify-between text-[10px] mt-2 uppercase tracking-wider" style="color: var(--text-muted);">
+              <span>3 hrs</span>
+              <span>8 hrs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results side -->
+      <div class="animate-on-scroll animate-delay-200 p-8 md:p-12 flex flex-col justify-center" style="background: var(--bg-card);">
+        <!-- Animated SVG gauge -->
+        <div class="flex justify-center mb-10">
+          <div class="relative w-44 h-44">
+            <svg viewBox="0 0 160 160" class="w-full h-full -rotate-90">
+              <circle cx="80" cy="80" r="70" fill="none" stroke="var(--border)" stroke-width="8"/>
+              <circle id="gauge-circle" cx="80" cy="80" r="70" fill="none" stroke="var(--accent)" stroke-width="8" stroke-linecap="round" stroke-dasharray="440" stroke-dashoffset="330" class="transition-all duration-700 ease-out"/>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="text-xs uppercase tracking-wider" style="color: var(--text-muted);">You Save</span>
+              <span id="savings-percent" class="text-3xl font-black" style="color: var(--accent);">25%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div class="text-center p-4 rounded-xl" style="background: var(--bg-card-alt);">
+            <span class="text-xs uppercase tracking-wider block mb-2" style="color: var(--text-muted);">Recommended</span>
+            <span id="kw-result" class="text-3xl font-black block" style="color: var(--text-primary);">2 kW</span>
+          </div>
+          <div class="text-center p-4 rounded-xl" style="background: var(--bg-card-alt);">
+            <span class="text-xs uppercase tracking-wider block mb-2" style="color: var(--text-muted);">System Cost</span>
+            <span id="cost-result" class="text-3xl font-black block" style="color: var(--text-primary);">₹1.2L</span>
+          </div>
+          <div class="text-center p-4 rounded-xl" style="background: var(--bg-card-alt);">
+            <span class="text-xs uppercase tracking-wider block mb-2" style="color: var(--text-muted);">Govt. Subsidy</span>
+            <span id="subsidy-result" class="text-3xl font-black block" style="color: var(--accent);">₹60K</span>
+          </div>
+          <div class="text-center p-4 rounded-xl" style="background: var(--bg-card-alt);">
+            <span class="text-xs uppercase tracking-wider block mb-2" style="color: var(--text-muted);">Monthly Savings</span>
+            <span id="monthly-result" class="text-3xl font-black block" style="color: var(--accent);">₹1.5K</span>
+          </div>
+        </div>
+
+        <div class="mt-3 text-center p-4 rounded-xl" style="background: var(--accent-soft); border: 1px solid var(--accent-soft);">
+          <span class="text-xs uppercase tracking-wider block mb-2" style="color: var(--text-muted);">Payback Period</span>
+          <span id="payback-result" class="text-2xl font-black block" style="color: var(--text-primary);">~3.5 Years</span>
+        </div>
+
+        <a href="#contact" class="mt-8 group inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full font-bold text-sm uppercase tracking-[0.1em] shadow-xl hover:scale-105 transition-all duration-300" style="background: var(--accent); color: var(--accent-text); box-shadow: 0 4px 25px var(--shadow-accent);">
+          Get Exact Quote
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initCalculator() {
+    const billSlider = document.getElementById('bill-slider') as HTMLInputElement;
+    const areaSlider = document.getElementById('area-slider') as HTMLInputElement;
+    const sunSlider = document.getElementById('sun-slider') as HTMLInputElement;
+    if (!billSlider || !areaSlider || !sunSlider) return;
+
+    function calculate() {
+      const bill = parseInt(billSlider.value);
+      const area = parseInt(areaSlider.value);
+      const sunHours = parseFloat(sunSlider.value);
+
+      // Calculate recommended kW: ~100 sq ft per kW, but also cap by bill
+      const kwByArea = Math.floor(area / 100);
+      const kwByBill = Math.ceil(bill / 1000);
+      const kw = Math.max(1, Math.min(kwByArea, kwByBill, 10));
+
+      // System cost: ~₹60,000 per kW (after market rates)
+      const costPerKw = 60000;
+      const totalCost = kw * costPerKw;
+
+      // Government subsidy (PM Surya Ghar Yojana)
+      let subsidy = 0;
+      if (kw <= 2) {
+        subsidy = kw * 30000;
+      } else if (kw <= 3) {
+        subsidy = 60000 + (kw - 2) * 18000;
+      } else {
+        subsidy = 78000;
+      }
+
+      // Net cost
+      const netCost = totalCost - subsidy;
+
+      // Monthly generation: kW × sunHours × 30 days × 0.8 efficiency
+      const monthlyUnits = kw * sunHours * 30 * 0.8;
+      const ratePerUnit = 7; // avg ₹7/unit
+      const monthlySavings = Math.round(monthlyUnits * ratePerUnit);
+      const savingsPercent = Math.min(99, Math.round((monthlySavings / bill) * 100));
+
+      // Payback in years
+      const paybackYears = netCost > 0 ? (netCost / (monthlySavings * 12)).toFixed(1) : '0';
+
+      // Update displays
+      const billDisplay = document.getElementById('bill-display');
+      const areaDisplay = document.getElementById('area-display');
+      const sunDisplay = document.getElementById('sun-display');
+      const kwResult = document.getElementById('kw-result');
+      const costResult = document.getElementById('cost-result');
+      const subsidyResult = document.getElementById('subsidy-result');
+      const monthlyResult = document.getElementById('monthly-result');
+      const paybackResult = document.getElementById('payback-result');
+      const savingsPercentEl = document.getElementById('savings-percent');
+      const gaugeCircle = document.getElementById('gauge-circle');
+
+      if (billDisplay) billDisplay.textContent = '₹' + bill.toLocaleString('en-IN');
+      if (areaDisplay) areaDisplay.textContent = area.toLocaleString('en-IN') + ' sq ft';
+      if (sunDisplay) sunDisplay.textContent = sunHours + ' hrs';
+      if (kwResult) kwResult.textContent = kw + ' kW';
+
+      if (costResult) {
+        costResult.textContent = totalCost >= 100000 ? '₹' + (totalCost / 100000).toFixed(1) + 'L' : '₹' + (totalCost / 1000).toFixed(0) + 'K';
+      }
+      if (subsidyResult) {
+        subsidyResult.textContent = subsidy >= 100000 ? '₹' + (subsidy / 100000).toFixed(1) + 'L' : '₹' + (subsidy / 1000).toFixed(0) + 'K';
+      }
+      if (monthlyResult) {
+        monthlyResult.textContent = monthlySavings >= 1000 ? '₹' + (monthlySavings / 1000).toFixed(1) + 'K' : '₹' + monthlySavings;
+      }
+      if (paybackResult) paybackResult.textContent = '~' + paybackYears + ' Years';
+      if (savingsPercentEl) savingsPercentEl.textContent = savingsPercent + '%';
+
+      // Animate SVG gauge: 440 circumference, offset = 440 - (440 * percent/100)
+      if (gaugeCircle) {
+        const offset = 440 - (440 * savingsPercent / 100);
+        gaugeCircle.setAttribute('stroke-dashoffset', String(offset));
+      }
+    }
+
+    billSlider.addEventListener('input', calculate);
+    areaSlider.addEventListener('input', calculate);
+    sunSlider.addEventListener('input', calculate);
+
+    calculate(); // initial
+  }
+
+  document.addEventListener('DOMContentLoaded', initCalculator);
+</script>

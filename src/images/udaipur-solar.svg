@@ -1,0 +1,135 @@
+<!-- Udaipur Residential Solar Installation — Decorative illustration -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <!-- Sky gradient background -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#0f2440"/>
+    </linearGradient>
+    <linearGradient id="panelShine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dc8a6a"/>
+      <stop offset="100%" stop-color="#c47050"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="60%" stop-color="#f59e0b" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#sky)"/>
+
+  <!-- Sun -->
+  <circle cx="500" cy="60" r="50" fill="url(#sun)"/>
+  <circle cx="500" cy="60" r="22" fill="#fbbf24"/>
+
+  <!-- Sun rays -->
+  <g stroke="#fbbf24" stroke-width="2" stroke-linecap="round" opacity="0.5">
+    <line x1="500" y1="15" x2="500" y2="5"/>
+    <line x1="500" y1="105" x2="500" y2="115"/>
+    <line x1="455" y1="60" x2="445" y2="60"/>
+    <line x1="545" y1="60" x2="555" y2="60"/>
+    <line x1="468" y1="28" x2="461" y2="21"/>
+    <line x1="532" y1="92" x2="539" y2="99"/>
+    <line x1="532" y1="28" x2="539" y2="21"/>
+    <line x1="468" y1="92" x2="461" y2="99"/>
+  </g>
+
+  <!-- Distant hills (Udaipur Aravalli feel) -->
+  <path d="M0 280 Q80 230 160 260 Q240 220 320 250 Q380 230 440 245 Q520 210 600 240 V400 H0Z" fill="#16a34a" opacity="0.12"/>
+  <path d="M0 300 Q100 260 200 285 Q300 255 400 280 Q500 260 600 270 V400 H0Z" fill="#16a34a" opacity="0.08"/>
+
+  <!-- Building body -->
+  <rect x="100" y="210" width="400" height="190" rx="2" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- Windows -->
+  <rect x="140" y="260" width="50" height="60" rx="2" fill="#bae6fd" stroke="#7dd3fc" stroke-width="1"/>
+  <rect x="215" y="260" width="50" height="60" rx="2" fill="#bae6fd" stroke="#7dd3fc" stroke-width="1"/>
+  <rect x="335" y="260" width="50" height="60" rx="2" fill="#bae6fd" stroke="#7dd3fc" stroke-width="1"/>
+  <rect x="410" y="260" width="50" height="60" rx="2" fill="#bae6fd" stroke="#7dd3fc" stroke-width="1"/>
+
+  <!-- Door -->
+  <rect x="270" y="310" width="60" height="90" rx="2" fill="#64748b" stroke="#475569" stroke-width="1"/>
+  <circle cx="320" cy="360" r="3" fill="#fbbf24"/>
+
+  <!-- Window reflections -->
+  <line x1="145" y1="265" x2="165" y2="285" stroke="white" stroke-width="0.5" opacity="0.4"/>
+  <line x1="220" y1="265" x2="240" y2="285" stroke="white" stroke-width="0.5" opacity="0.4"/>
+  <line x1="340" y1="265" x2="360" y2="285" stroke="white" stroke-width="0.5" opacity="0.4"/>
+  <line x1="415" y1="265" x2="435" y2="285" stroke="white" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Roof -->
+  <polygon points="80,210 300,120 520,210" fill="url(#roof)" stroke="#b45c3f" stroke-width="1.5"/>
+
+  <!-- Solar panels on roof — Row 1 -->
+  <g>
+    <rect x="180" y="155" width="60" height="35" rx="1" fill="url(#panel)" stroke="#0d4a7a" stroke-width="1" transform="rotate(-15, 210, 172)"/>
+    <rect x="180" y="155" width="60" height="35" rx="1" fill="url(#panelShine)" transform="rotate(-15, 210, 172)"/>
+    <!-- Grid lines -->
+    <line x1="200" y1="155" x2="200" y2="190" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 210, 172)"/>
+    <line x1="220" y1="155" x2="220" y2="190" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 210, 172)"/>
+    <line x1="180" y1="167" x2="240" y2="167" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 210, 172)"/>
+    <line x1="180" y1="179" x2="240" y2="179" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 210, 172)"/>
+  </g>
+
+  <g>
+    <rect x="250" y="145" width="60" height="35" rx="1" fill="url(#panel)" stroke="#0d4a7a" stroke-width="1" transform="rotate(-15, 280, 162)"/>
+    <rect x="250" y="145" width="60" height="35" rx="1" fill="url(#panelShine)" transform="rotate(-15, 280, 162)"/>
+    <line x1="270" y1="145" x2="270" y2="180" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 280, 162)"/>
+    <line x1="290" y1="145" x2="290" y2="180" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 280, 162)"/>
+    <line x1="250" y1="157" x2="310" y2="157" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 280, 162)"/>
+    <line x1="250" y1="169" x2="310" y2="169" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 280, 162)"/>
+  </g>
+
+  <!-- Solar panels — Row 2 -->
+  <g>
+    <rect x="200" y="178" width="60" height="35" rx="1" fill="url(#panel)" stroke="#0d4a7a" stroke-width="1" transform="rotate(-15, 230, 195)"/>
+    <rect x="200" y="178" width="60" height="35" rx="1" fill="url(#panelShine)" transform="rotate(-15, 230, 195)"/>
+    <line x1="220" y1="178" x2="220" y2="213" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 230, 195)"/>
+    <line x1="240" y1="178" x2="240" y2="213" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 230, 195)"/>
+    <line x1="200" y1="190" x2="260" y2="190" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 230, 195)"/>
+    <line x1="200" y1="202" x2="260" y2="202" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 230, 195)"/>
+  </g>
+
+  <g>
+    <rect x="270" y="168" width="60" height="35" rx="1" fill="url(#panel)" stroke="#0d4a7a" stroke-width="1" transform="rotate(-15, 300, 185)"/>
+    <rect x="270" y="168" width="60" height="35" rx="1" fill="url(#panelShine)" transform="rotate(-15, 300, 185)"/>
+    <line x1="290" y1="168" x2="290" y2="203" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 300, 185)"/>
+    <line x1="310" y1="168" x2="310" y2="203" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 300, 185)"/>
+    <line x1="270" y1="180" x2="330" y2="180" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 300, 185)"/>
+    <line x1="270" y1="192" x2="330" y2="192" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(-15, 300, 185)"/>
+  </g>
+
+  <!-- Right side panels -->
+  <g>
+    <rect x="340" y="158" width="60" height="35" rx="1" fill="url(#panel)" stroke="#0d4a7a" stroke-width="1" transform="rotate(15, 370, 175)"/>
+    <rect x="340" y="158" width="60" height="35" rx="1" fill="url(#panelShine)" transform="rotate(15, 370, 175)"/>
+    <line x1="360" y1="158" x2="360" y2="193" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(15, 370, 175)"/>
+    <line x1="380" y1="158" x2="380" y2="193" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(15, 370, 175)"/>
+    <line x1="340" y1="170" x2="400" y2="170" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(15, 370, 175)"/>
+    <line x1="340" y1="182" x2="400" y2="182" stroke="#1e5a8f" stroke-width="0.5" transform="rotate(15, 370, 175)"/>
+  </g>
+
+  <!-- Energy flow arrows (animated-look) -->
+  <path d="M310 130 Q330 110 340 90 Q350 70 370 60" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
+  <path d="M355 130 Q375 110 390 95" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4 4" fill="none" opacity="0.4"/>
+
+  <!-- Small lightning bolt icon -->
+  <path d="M372 58 L368 68 L374 68 L370 78" stroke="#22c55e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Ground / grass -->
+  <rect x="0" y="395" width="600" height="5" fill="#16a34a" opacity="0.2"/>
+
+  <!-- Text overlay -->
+  <text x="300" y="385" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#64748b" letter-spacing="2" opacity="0.7">UDAIPUR · 3 KW RESIDENTIAL</text>
+</svg>

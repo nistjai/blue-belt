@@ -1,0 +1,102 @@
+<!--
+  ╔══════════════════════════════════════════════════╗
+  ║  PROJECTS SECTION                                ║
+  ║  Showcase grid of recent solar installations     ║
+  ║  across Gujarat, Rajasthan & Madhya Pradesh.     ║
+  ║  Uses gap-px grid pattern for border effect.     ║
+  ╚══════════════════════════════════════════════════╝
+-->
+---
+import udaipurImg from '../images/udaipur-solar.svg';
+---
+
+<section class="py-32" style="background: var(--bg-secondary);" id="projects">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+    <!-- ── Section Header ── -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20 animate-on-scroll">
+      <div>
+        <span class="text-sm font-medium tracking-[0.2em] uppercase block mb-4" style="color: var(--accent);">Portfolio</span>
+        <h2 class="text-4xl md:text-6xl font-black tracking-tight uppercase leading-[0.95]" style="color: var(--text-primary);">Recent<br/>Projects</h2>
+      </div>
+      <p class="max-w-md text-lg leading-relaxed" style="color: var(--text-secondary);">A glimpse of our solar installations across Gujarat, Rajasthan & Madhya Pradesh.</p>
+    </div>
+
+    <!-- ── Project Grid (gap-px creates 1px borders) ── -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px rounded-2xl overflow-hidden" style="background: var(--border);">
+
+      <!-- Project 1: Ahmedabad — Residential -->
+      <div class="animate-on-scroll group overflow-hidden" style="background: var(--bg-secondary);">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop" alt="5 kW rooftop solar installation on a residential home in Ahmedabad" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-xs font-medium tracking-[0.2em] uppercase" style="color: var(--accent);">Residential</span>
+          <h3 class="font-bold text-lg uppercase tracking-wide mt-2" style="color: var(--text-primary);">Ahmedabad</h3>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">5 kW Rooftop Solar System</p>
+        </div>
+      </div>
+
+      <!-- Project 2: Jaipur — Commercial -->
+      <div class="animate-on-scroll animate-delay-100 group overflow-hidden" style="background: var(--bg-secondary);">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600&h=400&fit=crop" alt="50 kW commercial solar system on factory rooftop in Jaipur" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-xs font-medium tracking-[0.2em] uppercase" style="color: var(--accent);">Commercial</span>
+          <h3 class="font-bold text-lg uppercase tracking-wide mt-2" style="color: var(--text-primary);">Jaipur</h3>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">50 kW Factory Rooftop System</p>
+        </div>
+      </div>
+
+      <!-- Project 3: Indore — Solar Farm -->
+      <div class="animate-on-scroll animate-delay-200 group overflow-hidden" style="background: var(--bg-secondary);">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=600&h=400&fit=crop" alt="500 kW ground-mounted solar farm near Indore" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-xs font-medium tracking-[0.2em] uppercase" style="color: var(--accent);">Solar Farm</span>
+          <h3 class="font-bold text-lg uppercase tracking-wide mt-2" style="color: var(--text-primary);">Indore</h3>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">500 kW Ground-Mounted Solar Farm</p>
+        </div>
+      </div>
+
+      <!-- Project 4: Surat — Industrial -->
+      <div class="animate-on-scroll group overflow-hidden" style="background: var(--bg-secondary);">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&h=400&fit=crop" alt="100 kW industrial solar system in Surat" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-xs font-medium tracking-[0.2em] uppercase" style="color: var(--accent);">Industrial</span>
+          <h3 class="font-bold text-lg uppercase tracking-wide mt-2" style="color: var(--text-primary);">Surat</h3>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">100 kW Industrial Solar System</p>
+        </div>
+      </div>
+
+      <!-- Project 5: Udaipur — Residential (local SVG image) -->
+      <div class="animate-on-scroll animate-delay-100 group overflow-hidden" style="background: var(--bg-secondary);">
+        <div class="overflow-hidden" style="background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-alt) 100%);">
+          <img src={udaipurImg.src} alt="3 kW residential solar installation illustration for Udaipur" class="w-full h-56 object-contain group-hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-xs font-medium tracking-[0.2em] uppercase" style="color: var(--accent);">Residential</span>
+          <h3 class="font-bold text-lg uppercase tracking-wide mt-2" style="color: var(--text-primary);">Udaipur</h3>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">3 kW Home Solar System</p>
+        </div>
+      </div>
+
+      <!-- Project 6: Bhopal — Solar Farm -->
+      <div class="animate-on-scroll animate-delay-200 group overflow-hidden" style="background: var(--bg-secondary);">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1548337138-e87d889cc369?w=600&h=400&fit=crop" alt="1 MW ground-mounted solar farm near Bhopal" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-xs font-medium tracking-[0.2em] uppercase" style="color: var(--accent);">Solar Farm</span>
+          <h3 class="font-bold text-lg uppercase tracking-wide mt-2" style="color: var(--text-primary);">Bhopal</h3>
+          <p class="text-sm mt-1" style="color: var(--text-muted);">1 MW Ground-Mounted Solar Farm</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

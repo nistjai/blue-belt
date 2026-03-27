@@ -1,0 +1,282 @@
+---
+/**
+ * ═══════════════════════════════════════════════════
+ *  INDEX.ASTRO — Main Entry Page
+ *  Dharti Solar Rooftop Solutions
+ * ═══════════════════════════════════════════════════
+ *  This is the single-page layout that composes all
+ *  sections in order. Each section is a standalone
+ *  Astro component. The page also includes:
+ *    - Global CSS with theme variables (dark/light)
+ *    - Particle canvas for interactive dot grid
+ *    - Theme toggle logic
+ *    - Scroll reveal & counter animations
+ * ═══════════════════════════════════════════════════
+ */
+import "../styles/global.css";
+
+// ── Layout Components ──
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+
+// ── Section Components (in page order) ──
+import Hero from "../components/Hero.astro";
+import Brands from "../components/Brands.astro";
+import Services from "../components/Services.astro";
+import WhyChooseUs from "../components/WhyChooseUs.astro";
+import Subsidy from "../components/Subsidy.astro";
+import Calculator from "../components/Calculator.astro";
+import Projects from "../components/Projects.astro";
+import Testimonials from "../components/Testimonials.astro";
+import CTA from "../components/CTA.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>Dharti Solar | Premium Solar Installations</title>
+    <meta name="description" content="Dharti Solar — Premium solar installations for homes, businesses & solar farms in Gujarat, Rajasthan & Madhya Pradesh. Government subsidy assistance available." />
+  </head>
+  <body class="scroll-smooth" style="font-family: 'Inter', sans-serif;">
+    <!-- Interactive particle canvas -->
+    <canvas id="particle-canvas" class="particle-canvas"></canvas>
+
+    <Navbar />
+    <main>
+      <Hero />
+      <Brands />       <!-- Trusted panel/inverter/battery brands -->
+      <Services />
+      <WhyChooseUs />
+      <Subsidy />
+      <Calculator />
+      <Projects />
+      <Testimonials />
+      <CTA />
+      <Contact />
+    </main>
+    <Footer />
+    <WhatsAppButton />
+
+    <script>
+      // ═══════════ THEME SYSTEM ═══════════
+      (function initTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.remove('light');
+        }
+      })();
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // ═══════════ SCROLL REVEAL ═══════════
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // ═══════════ COUNTER ANIMATION ═══════════
+        document.querySelectorAll('[data-count]').forEach(counter => {
+          const target = parseInt(counter.getAttribute('data-count') || '0', 10);
+          const suffix = counter.getAttribute('data-suffix') || '';
+          const prefix = counter.getAttribute('data-prefix') || '';
+          let current = 0;
+          const step = Math.max(1, Math.floor(target / 125));
+          const counterObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const interval = setInterval(() => {
+                  current += step;
+                  if (current >= target) { current = target; clearInterval(interval); }
+                  counter.textContent = prefix + current.toLocaleString('en-IN') + suffix;
+                }, 16);
+                counterObs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.5 });
+          counterObs.observe(counter);
+        });
+
+        // ═══════════ THEME TOGGLE ═══════════
+        document.querySelectorAll('.theme-toggle').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light');
+            const isLight = document.documentElement.classList.contains('light');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+          });
+        });
+
+        // ═══════════ INTERACTIVE DOT GRID (WQF-Style) ═══════════
+        const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        let w: number, h: number;
+        let mouse = { x: -9999, y: -9999 };
+        const spacing = 28;        // Grid spacing
+        const repelRadius = 160;   // Mouse influence radius
+        const repelStrength = 14;  // Push force
+        const elasticity = 0.045;  // Spring back speed
+        const friction = 0.82;     // Velocity damping
+        const baseSize = 1.5;      // Default dot radius
+        const maxSize = 3.5;       // Dot radius when hovered near
+        const lineAlpha = 0.04;    // Connecting line opacity
+
+        interface GridDot {
+          x: number; y: number;
+          baseX: number; baseY: number;
+          vx: number; vy: number;
+          col: number; row: number;
+        }
+
+        let dots: GridDot[] = [];
+        let cols = 0, rows = 0;
+
+        function buildGrid() {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+          dots = [];
+          cols = Math.ceil(w / spacing) + 1;
+          rows = Math.ceil(h / spacing) + 1;
+          const offsetX = (w - (cols - 1) * spacing) / 2;
+          const offsetY = (h - (rows - 1) * spacing) / 2;
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              const bx = offsetX + c * spacing;
+              const by = offsetY + r * spacing;
+              dots.push({ x: bx, y: by, baseX: bx, baseY: by, vx: 0, vy: 0, col: c, row: r });
+            }
+          }
+        }
+        buildGrid();
+
+        let resizeTimeout: number;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = window.setTimeout(buildGrid, 150);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        });
+        document.addEventListener('mouseleave', () => {
+          mouse.x = -9999;
+          mouse.y = -9999;
+        });
+        // Touch support
+        document.addEventListener('touchmove', (e) => {
+          if (e.touches[0]) {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+          }
+        }, { passive: true });
+        document.addEventListener('touchend', () => {
+          mouse.x = -9999;
+          mouse.y = -9999;
+        });
+
+        function animate() {
+          ctx!.clearRect(0, 0, w, h);
+          const style = getComputedStyle(document.documentElement);
+          const rgb = style.getPropertyValue('--particle-color').trim();
+
+          for (const dot of dots) {
+            const dx = dot.x - mouse.x;
+            const dy = dot.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            // Repel from cursor with smooth falloff
+            if (dist < repelRadius && dist > 0) {
+              const force = ((repelRadius - dist) / repelRadius);
+              const smoothForce = force * force; // Quadratic falloff for smoothness
+              const angle = Math.atan2(dy, dx);
+              dot.vx += Math.cos(angle) * smoothForce * repelStrength;
+              dot.vy += Math.sin(angle) * smoothForce * repelStrength;
+            }
+
+            // Spring back
+            dot.vx += (dot.baseX - dot.x) * elasticity;
+            dot.vy += (dot.baseY - dot.y) * elasticity;
+
+            // Friction
+            dot.vx *= friction;
+            dot.vy *= friction;
+
+            dot.x += dot.vx;
+            dot.y += dot.vy;
+
+            // Dynamic size and opacity based on displacement
+            const displacement = Math.sqrt((dot.x - dot.baseX) ** 2 + (dot.y - dot.baseY) ** 2);
+            const proximity = Math.max(0, 1 - dist / repelRadius);
+            const size = baseSize + (maxSize - baseSize) * Math.min(1, displacement / 20);
+            const alpha = 0.15 + 0.6 * proximity + 0.2 * Math.min(1, displacement / 15);
+
+            // Draw dot with glow when active
+            if (displacement > 2) {
+              ctx!.shadowColor = `rgba(${rgb}, 0.4)`;
+              ctx!.shadowBlur = 8;
+            } else {
+              ctx!.shadowColor = 'transparent';
+              ctx!.shadowBlur = 0;
+            }
+
+            ctx!.beginPath();
+            ctx!.arc(dot.x, dot.y, size, 0, Math.PI * 2);
+            ctx!.fillStyle = `rgba(${rgb}, ${alpha})`;
+            ctx!.fill();
+          }
+
+          // Reset shadow for lines
+          ctx!.shadowColor = 'transparent';
+          ctx!.shadowBlur = 0;
+
+          // Connecting lines between adjacent grid dots
+          for (const dot of dots) {
+            // Right neighbor
+            if (dot.col < cols - 1) {
+              const right = dots[dot.row * cols + dot.col + 1];
+              if (right) drawLine(ctx!, dot, right, rgb, lineAlpha);
+            }
+            // Bottom neighbor
+            if (dot.row < rows - 1) {
+              const below = dots[(dot.row + 1) * cols + dot.col];
+              if (below) drawLine(ctx!, dot, below, rgb, lineAlpha);
+            }
+          }
+
+          requestAnimationFrame(animate);
+        }
+
+        function drawLine(c: CanvasRenderingContext2D, a: any, b: any, rgb: string, baseAlpha: number) {
+          // Make lines brighter when dots are displaced
+          const dispA = Math.sqrt((a.x - a.baseX) ** 2 + (a.y - a.baseY) ** 2);
+          const dispB = Math.sqrt((b.x - b.baseX) ** 2 + (b.y - b.baseY) ** 2);
+          const avgDisp = (dispA + dispB) / 2;
+          const alpha = baseAlpha + Math.min(0.15, avgDisp * 0.008);
+
+          c.beginPath();
+          c.moveTo(a.x, a.y);
+          c.lineTo(b.x, b.y);
+          c.strokeStyle = `rgba(${rgb}, ${alpha})`;
+          c.lineWidth = 0.5;
+          c.stroke();
+        }
+
+        animate();
+      });
+    </script>
+  </body>
+</html>
